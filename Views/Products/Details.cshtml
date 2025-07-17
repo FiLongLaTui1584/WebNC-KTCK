@@ -4,32 +4,65 @@
     ViewData["Title"] = "Chi tiết sản phẩm";
 }
 
-<h2>Chi tiết sản phẩm</h2>
-<div class="card" style="max-width: 500px; padding: 20px; border: 1px solid #ccc;">
-    <h4>@Model.NamePro</h4>
-    <p><strong>Danh mục:</strong> @Model.Category</p>
-    <p><strong>Giá:</strong> @Model.Price?.ToString("C")</p>
-    <p><strong>Mô tả:</strong> @Model.DecriptionPro</p>
-    <p><strong>Ngày sản xuất:</strong> @Model.ManufacturingDate.ToString("dd/MM/yyyy")</p>
-    @if (!string.IsNullOrEmpty(Model.ImagePro))
-    {
-        <p><strong>Hình ảnh:</strong> <img src="@Model.ImagePro" alt="@Model.NamePro" style="max-width: 200px;" /></p>
-    }
-    <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary mt-3">Chỉnh sửa</a>
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card shadow-lg border-0 rounded-3" style="max-width: 600px;">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">@Model.NamePro</h3>
+        </div>
+        <div class="card-body p-4">
+            <div class="mb-3">
+                <strong>Danh mục:</strong>
+                <span class="text-muted">@Model.Category</span>
+            </div>
+
+            <div class="mb-3">
+                <strong>Giá:</strong>
+                <span class="fw-bold text-success">@Model.Price?.ToString("C")</span>
+            </div>
+
+            <div class="mb-3">
+                <strong>Mô tả:</strong>
+                <p class="text-secondary">@Model.DecriptionPro</p>
+            </div>
+
+            <div class="mb-3">
+                <strong>Ngày sản xuất:</strong>
+                <span class="text-muted">@Model.ManufacturingDate.ToString("dd/MM/yyyy")</span>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.ImagePro))
+            {
+                <div class="text-center my-4">
+                    <img src="@Model.ImagePro" alt="@Model.NamePro" class="img-fluid rounded shadow-sm" style="max-height: 250px; object-fit: cover;" />
+                </div>
+            }
+
+            <div class="text-center mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary px-4">
+                    ✏️ Chỉnh sửa
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style>
-    .card {
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    .card-header {
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
     }
 
-    h2, h4 {
-        color: #2c3e50;
+    .card-body strong {
+        color: #34495e;
     }
 
     .btn-primary {
-        background-color: #007bff;
-        border: none;
+        transition: 0.3s ease;
     }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
 </style>

@@ -4,77 +4,108 @@
     ViewData["Title"] = "Chỉnh sửa sản phẩm";
 }
 
-<h2>Chỉnh sửa sản phẩm</h2>
-<form asp-action="Edit" method="post" enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="ProductId" />
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card shadow-lg border-0 rounded-3" style="max-width: 700px; width: 100%;">
+        <div class="card-header bg-warning text-dark text-center">
+            <h3 class="mb-0">✏️ Chỉnh sửa sản phẩm</h3>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <input type="hidden" asp-for="ProductId" />
 
-    <div class="form-group">
-        <label asp-for="NamePro" class="control-label"></label>
-        <input asp-for="NamePro" class="form-control" />
-        <span asp-validation-for="NamePro" class="text-danger"></span>
-    </div>
+                <!-- Tên sản phẩm -->
+                <div class="mb-3">
+                    <label asp-for="NamePro" class="form-label fw-bold"></label>
+                    <input asp-for="NamePro" class="form-control" placeholder="Nhập tên sản phẩm..." />
+                    <span asp-validation-for="NamePro" class="text-danger small"></span>
+                </div>
 
-    <div class="form-group">
-        <label asp-for="DecriptionPro" class="control-label"></label>
-        <textarea asp-for="DecriptionPro" class="form-control"></textarea>
-        <span asp-validation-for="DecriptionPro" class="text-danger"></span>
-    </div>
+                <!-- Mô tả -->
+                <div class="mb-3">
+                    <label asp-for="DecriptionPro" class="form-label fw-bold"></label>
+                    <textarea asp-for="DecriptionPro" class="form-control" rows="3" placeholder="Mô tả chi tiết sản phẩm..."></textarea>
+                    <span asp-validation-for="DecriptionPro" class="text-danger small"></span>
+                </div>
 
-    <div class="form-group">
-        <label asp-for="Category" class="control-label"></label>
-        @await Component.InvokeAsync("CategoryList")
-        <span asp-validation-for="Category" class="text-danger"></span>
-    </div>
+                <!-- Danh mục -->
+                <div class="mb-3">
+                    <label asp-for="Category" class="form-label fw-bold"></label>
+                    @await Component.InvokeAsync("CategoryList")
+                    <span asp-validation-for="Category" class="text-danger small"></span>
+                </div>
 
-    <div class="form-group">
-        <label asp-for="Price" class="control-label"></label>
-        <input asp-for="Price" class="form-control" type="number" step="0.01" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
+                <!-- Giá -->
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label fw-bold"></label>
+                    <div class="input-group">
+                        <span class="input-group-text">₫</span>
+                        <input asp-for="Price" class="form-control" type="number" step="0.01" placeholder="Nhập giá sản phẩm..." />
+                    </div>
+                    <span asp-validation-for="Price" class="text-danger small"></span>
+                </div>
 
-    <div class="form-group">
-        <label class="control-label">Hình ảnh sản phẩm</label>
-        <input type="file" name="ImageProFile" class="form-control" accept="image/*" />
-        @if (!string.IsNullOrEmpty(Model.ImagePro))
-        {
-            <img src="@Model.ImagePro" alt="Current Image" style="max-width: 200px; margin-top: 10px;" />
-        }
-        <span class="text-danger"></span>
-    </div>
+                <!-- Ảnh sản phẩm -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Hình ảnh sản phẩm</label>
+                    <input type="file" name="ImageProFile" class="form-control" accept="image/*" />
 
-    <div class="form-group">
-        <label asp-for="ManufacturingDate" class="control-label"></label>
-        <input asp-for="ManufacturingDate" class="form-control" type="date" />
-        <span asp-validation-for="ManufacturingDate" class="text-danger"></span>
-    </div>
+                    @if (!string.IsNullOrEmpty(Model.ImagePro))
+                    {
+                        <div class="text-center mt-3">
+                            <p class="text-muted small">Ảnh hiện tại:</p>
+                            <img src="@Model.ImagePro" alt="Current Image" class="img-thumbnail shadow-sm" style="max-height: 180px; object-fit: cover;" />
+                        </div>
+                    }
+                </div>
 
-    <div class="form-group">
-        <input type="submit" value="Lưu" class="btn btn-primary" />
-        <a asp-action="Details" asp-route-id="@Model.ProductId" class="btn btn-secondary ms-2">Quay lại chi tiết</a>
+                <!-- Ngày sản xuất -->
+                <div class="mb-3">
+                    <label asp-for="ManufacturingDate" class="form-label fw-bold"></label>
+                    <input asp-for="ManufacturingDate" class="form-control" type="date" />
+                    <span asp-validation-for="ManufacturingDate" class="text-danger small"></span>
+                </div>
+
+                <!-- Nút hành động -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Details" asp-route-id="@Model.ProductId" class="btn btn-secondary">
+                        ⬅ Quay lại chi tiết
+                    </a>
+                    <button type="submit" class="btn btn-primary px-4">
+                        💾 Lưu thay đổi
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
 
 <style>
-    .form-group {
-        margin-bottom: 15px;
+    .card-header {
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
     }
 
-    .form-control {
-        border-radius: 4px;
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
     }
 
     .btn-primary {
-        background-color: #007bff;
-        border: none;
+        transition: all 0.3s ease;
     }
 
-    .btn-secondary {
-        background-color: #6c757d;
-        border: none;
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
     }
 </style>
