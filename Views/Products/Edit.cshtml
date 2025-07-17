@@ -1,0 +1,80 @@
+﻿@model _22DH112015_TranPhiLong.Models.Product
+
+@{
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+}
+
+<h2>Chỉnh sửa sản phẩm</h2>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ProductId" />
+
+    <div class="form-group">
+        <label asp-for="NamePro" class="control-label"></label>
+        <input asp-for="NamePro" class="form-control" />
+        <span asp-validation-for="NamePro" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DecriptionPro" class="control-label"></label>
+        <textarea asp-for="DecriptionPro" class="form-control"></textarea>
+        <span asp-validation-for="DecriptionPro" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Category" class="control-label"></label>
+        @await Component.InvokeAsync("CategoryList")
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price" class="control-label"></label>
+        <input asp-for="Price" class="form-control" type="number" step="0.01" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Hình ảnh sản phẩm</label>
+        <input type="file" name="ImageProFile" class="form-control" accept="image/*" />
+        @if (!string.IsNullOrEmpty(Model.ImagePro))
+        {
+            <img src="@Model.ImagePro" alt="Current Image" style="max-width: 200px; margin-top: 10px;" />
+        }
+        <span class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ManufacturingDate" class="control-label"></label>
+        <input asp-for="ManufacturingDate" class="form-control" type="date" />
+        <span asp-validation-for="ManufacturingDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Lưu" class="btn btn-primary" />
+        <a asp-action="Details" asp-route-id="@Model.ProductId" class="btn btn-secondary ms-2">Quay lại chi tiết</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+</style>

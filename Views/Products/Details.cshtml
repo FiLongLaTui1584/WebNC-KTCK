@@ -1,0 +1,35 @@
+﻿@model _22DH112015_TranPhiLong.Models.Product
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+<div class="card" style="max-width: 500px; padding: 20px; border: 1px solid #ccc;">
+    <h4>@Model.NamePro</h4>
+    <p><strong>Danh mục:</strong> @Model.Category</p>
+    <p><strong>Giá:</strong> @Model.Price?.ToString("C")</p>
+    <p><strong>Mô tả:</strong> @Model.DecriptionPro</p>
+    <p><strong>Ngày sản xuất:</strong> @Model.ManufacturingDate.ToString("dd/MM/yyyy")</p>
+    @if (!string.IsNullOrEmpty(Model.ImagePro))
+    {
+        <p><strong>Hình ảnh:</strong> <img src="@Model.ImagePro" alt="@Model.NamePro" style="max-width: 200px;" /></p>
+    }
+    <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary mt-3">Chỉnh sửa</a>
+</div>
+
+<style>
+    .card {
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    h2, h4 {
+        color: #2c3e50;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+</style>
