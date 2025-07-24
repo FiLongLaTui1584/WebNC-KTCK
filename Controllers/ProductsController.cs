@@ -33,7 +33,7 @@ public class ProductsController : Controller
         }
         return View(product);
     }
-
+        
     [HttpGet]
     public IActionResult Edit(int id)
     {

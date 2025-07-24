@@ -7,7 +7,7 @@
 <div class="container my-5 d-flex justify-content-center">
     <div class="card shadow-lg border-0 rounded-3" style="max-width: 700px; width: 100%;">
         <div class="card-header bg-warning text-dark text-center">
-            <h3 class="mb-0">✏️ Chỉnh sửa sản phẩm</h3>
+            <h3 class="mb-0">Chỉnh sửa sản phẩm</h3>
         </div>
         <div class="card-body p-4">
             <form asp-action="Edit" method="post" enctype="multipart/form-data">
@@ -69,10 +69,10 @@
                 <!-- Nút hành động -->
                 <div class="d-flex justify-content-between mt-4">
                     <a asp-action="Details" asp-route-id="@Model.ProductId" class="btn btn-secondary">
-                        ⬅ Quay lại chi tiết
+                        Quay lại chi tiết
                     </a>
                     <button type="submit" class="btn btn-primary px-4">
-                        💾 Lưu thay đổi
+                        Lưu thay đổi
                     </button>
                 </div>
             </form>
